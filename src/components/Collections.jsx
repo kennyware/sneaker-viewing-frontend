@@ -9,19 +9,24 @@ const Collections = () => {
     <StyledCollections>
       <Link to="/products">
         <div>
-          <img src={mensFeatureImg} alt="feature image with a man sitting" />
+          <img src={mensFeatureImg} alt="feature with a man sitting" />
           <p>Men's</p>
         </div>
       </Link>
 
-      <div>
-        <img src={womensFeatureImg} alt="feature image with a women sitting" />
-        <p>Women's</p>
-      </div>
-      <div>
-        <img src={kidsFeatureImg} alt="feature image with a toy and a shoe" />
-        <p>Kid's</p>
-      </div>
+      <Link to="/products">
+        <div>
+          <img src={womensFeatureImg} alt="feature with a women sitting" />
+          <p>Women's</p>
+        </div>
+      </Link>
+
+      <Link to="/products">
+        <div>
+          <img src={kidsFeatureImg} alt="feature with a toy and a shoe" />
+          <p>Kid's</p>
+        </div>
+      </Link>
     </StyledCollections>
   );
 };

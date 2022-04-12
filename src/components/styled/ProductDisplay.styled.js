@@ -1,0 +1,65 @@
+import styled from "styled-components";
+
+export const StyledProductDisplay = styled.div`
+  display: grid;
+  grid-template-columns: 60% auto;
+  grid-template-rows: 100px auto;
+  justify-content: center;
+  column-gap: 50px;
+
+  .product-display {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    width: 100%;
+
+    img {
+      display: block;
+      width: 600px;
+      margin: auto;
+    }
+  }
+
+  .product-name {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+
+    h3 {
+      font-size: 2rem;
+    }
+  }
+
+  .product-details {
+    grid-column: 2 / 3;
+    grid-row: 2;
+
+    table {
+      width: 300px;
+    }
+
+    th {
+      text-align: left;
+    }
+
+    tr {
+      height: 30px;
+    }
+  }
+
+  button {
+    background: #111;
+    border: none;
+    color: #fff;
+    border-radius: 50px;
+    padding: 15px 0;
+    grid-column: 2;
+    grid-row: 2;
+    height: 50px;
+    align-self: center;
+    margin-top: 70px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 70%;
+    }
+  }
+`;
