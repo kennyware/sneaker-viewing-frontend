@@ -74,6 +74,7 @@ export const StyledNavbar = styled.nav`
     align-items: center;
 
     button {
+      display: block;
       background: none;
       border: none;
       border-radius: 50%;
@@ -81,6 +82,9 @@ export const StyledNavbar = styled.nav`
       width: 40px;
       height: 40px;
       transition: all 0.1s;
+      padding: 5px;
+
+      color: #111;
 
       &:hover {
         background: rgba(100, 100, 100, 0.4);

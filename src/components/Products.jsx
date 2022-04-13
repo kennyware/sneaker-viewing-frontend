@@ -4,9 +4,11 @@ import axios from "axios";
 import Product from "./Product";
 import { StyledProductSection } from "./styled/ProductSection.styled";
 import Options from "./Options";
+import { StyledFitlerMenu } from "./styled/FilterMenu.styled";
 
 const Products = () => {
   const [items, setItems] = useState([]);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   let [searchParams] = useSearchParams();
   const gender = searchParams.get("gender");
@@ -55,9 +57,14 @@ const Products = () => {
     fetchData();
   }, [gender]);
 
+  const openMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <>
-      <Options />
+      <Options openMenu={openMenu} />
+      {menuOpen && <StyledFitlerMenu />}
       <StyledProductSection>
         {items.map((item) => {
           return <Product key={item.id} item={item} />;

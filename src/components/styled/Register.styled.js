@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const StyledLogin = styled.section`
+export const StyledRegister = styled.section`
   width: 100%;
   display: flex;
 
-  .login-group {
+  .register-group {
     width: 50%;
     display: flex;
     align-items: center;
@@ -17,7 +17,7 @@ export const StyledLogin = styled.section`
       margin-top: 50px;
     }
 
-    #login-form {
+    #register-form {
       margin-top: 100px;
       input {
         display: block;

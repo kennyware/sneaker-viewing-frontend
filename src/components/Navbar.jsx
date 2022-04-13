@@ -34,12 +34,16 @@ const Navbar = () => {
       </div>
 
       <div className="action-icons">
-        <button className="bag-btn">
-          <FiShoppingBag />
-        </button>
-        <button className="account-btn">
-          <MdPersonOutline />
-        </button>
+        <Link to="/bag">
+          <button className="bag-btn">
+            <FiShoppingBag />
+          </button>
+        </Link>
+        <Link to="/login">
+          <button className="account-btn">
+            <MdPersonOutline />
+          </button>
+        </Link>
       </div>
     </StyledNavbar>
   );

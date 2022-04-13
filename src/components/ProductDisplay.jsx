@@ -8,6 +8,7 @@ const ProductDisplay = () => {
   let { id } = useParams();
 
   useEffect(() => {
+    // Fetch single product data from api
     const fetchData = async () => {
       const options = {
         headers: {
@@ -33,6 +34,7 @@ const ProductDisplay = () => {
     fetchData();
   }, [id]);
 
+  // Function to convert product release date from "YYYY-MM-DD" to "DD/MM/YYYY"
   const convertDate = (inputFormat) => {
     function pad(s) {
       return s < 10 ? "0" + s : s;

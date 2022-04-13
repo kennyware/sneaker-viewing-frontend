@@ -1,10 +1,12 @@
 import { StyledFilter } from "./styled/Filter.styled";
 import { MdFilterList } from "react-icons/md";
 
-export default function Filter() {
+const Filter = ({ openMenu }) => {
   return (
-    <StyledFilter>
+    <StyledFilter onClick={openMenu}>
       Filter <MdFilterList />
     </StyledFilter>
   );
-}
+};
+
+export default Filter;
