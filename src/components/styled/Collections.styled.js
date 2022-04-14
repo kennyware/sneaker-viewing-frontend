@@ -7,6 +7,11 @@ export const StyledCollections = styled.section`
   align-items: center;
   margin-top: 20px;
 
+  a {
+    text-decoration: none;
+    color: #111;
+  }
+
   div {
     text-align: center;
     font-size: 1.2rem;

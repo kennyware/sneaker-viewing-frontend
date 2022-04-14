@@ -2,14 +2,10 @@ import Filter from "./Filter";
 import { StyledSorter } from "./styled/Sorter.styled";
 import { StyledOptions } from "./styled/Options.styled";
 
-const Options = ({ openMenu }) => {
-  // const test = () => {
-  //   alert("regg");
-  // };
-
+const Options = ({ toggleMenu }) => {
   return (
     <StyledOptions>
-      <Filter openMenu={openMenu} />
+      <Filter toggleMenu={toggleMenu} />
       <StyledSorter>
         Sort By:
         <select name="sort" id="sorter" defaultValue={""}>

@@ -4,11 +4,12 @@ import axios from "axios";
 import Product from "./Product";
 import { StyledProductSection } from "./styled/ProductSection.styled";
 import Options from "./Options";
-import { StyledFitlerMenu } from "./styled/FilterMenu.styled";
+import FilterMenu from "./FilterMenu";
 
 const Products = () => {
   const [items, setItems] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [brands, setBrands] = useState([]);
 
   let [searchParams] = useSearchParams();
   const gender = searchParams.get("gender");
@@ -30,6 +31,26 @@ const Products = () => {
     // Remove objects without images
     const removeEmptyData = (data) => {
       return data.filter((item) => !checkData(item));
+    };
+
+    const getBrands = async () => {
+      const options = {
+        headers: {
+          "X-RapidAPI-Host": "v1-sneakers.p.rapidapi.com",
+          "X-RapidAPI-Key":
+            "d33eefbeb9msh22abd672c2b24c7p1002dfjsn656f51bdc9b5",
+        },
+      };
+
+      try {
+        const { data: res } = await axios.get(
+          "https://v1-sneakers.p.rapidapi.com/v1/brands",
+          options
+        );
+        setBrands(res.results);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     const fetchData = async () => {
@@ -54,17 +75,18 @@ const Products = () => {
       }
     };
 
+    getBrands();
     fetchData();
   }, [gender]);
 
-  const openMenu = () => {
+  const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   return (
     <>
-      <Options openMenu={openMenu} />
-      {menuOpen && <StyledFitlerMenu />}
+      <Options toggleMenu={toggleMenu} />
+      {menuOpen && <FilterMenu brands={brands} toggleMenu={toggleMenu} />}
       <StyledProductSection>
         {items.map((item) => {
           return <Product key={item.id} item={item} />;

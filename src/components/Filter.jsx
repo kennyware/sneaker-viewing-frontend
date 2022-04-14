@@ -1,9 +1,9 @@
 import { StyledFilter } from "./styled/Filter.styled";
 import { MdFilterList } from "react-icons/md";
 
-const Filter = ({ openMenu }) => {
+const Filter = ({ toggleMenu }) => {
   return (
-    <StyledFilter onClick={openMenu}>
+    <StyledFilter onClick={toggleMenu}>
       Filter <MdFilterList />
     </StyledFilter>
   );
