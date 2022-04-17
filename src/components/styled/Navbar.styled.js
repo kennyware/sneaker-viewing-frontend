@@ -34,41 +34,6 @@ export const StyledNavbar = styled.nav`
     }
   }
 
-  .search-bar {
-    border: 1.5px solid #000;
-    border-radius: 20px;
-    height: 30px;
-    max-width: 140px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px;
-    margin-right: 30px;
-
-    input[type="text"] {
-      border: none;
-      width: 100%;
-    }
-
-    input[type="text"]:focus {
-      border: none;
-      outline: none;
-    }
-
-    .search-btn {
-      background: none;
-      border: none;
-      height: 30px;
-      width: 30px;
-      margin-right: 5px;
-
-      svg {
-        height: 30px;
-        width: 20px;
-      }
-    }
-  }
-
   .action-icons {
     display: flex;
     align-items: center;

@@ -10,7 +10,7 @@ export const StyledFilter = styled.div`
   padding: 2.5px 0;
   transition: all 0.1s ease-in;
   cursor: pointer;
-  margin-right: 10px;
+  margin-right: 20px;
 
   &:hover {
     background: #111;

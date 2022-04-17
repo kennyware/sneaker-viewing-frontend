@@ -1,15 +1,14 @@
 import { StyledNavbar } from "./styled/Navbar.styled";
-import logo from "../logo.svg";
-import { MdPersonOutline, MdSearch } from "react-icons/md";
+import { MdPersonOutline } from "react-icons/md";
 import { FiShoppingBag } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import Logo from "./Logo";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   return (
     <StyledNavbar>
-      <Link to="/">
-        <img className="logo" src={logo} alt="logo" />
-      </Link>
+      <Logo />
 
       <ul>
         <li>
@@ -26,12 +25,7 @@ const Navbar = () => {
         </li>
       </ul>
 
-      <div className="search-bar">
-        <button className="search-btn">
-          <MdSearch />
-        </button>
-        <input type="text" placeholder="Search" />
-      </div>
+      <SearchBar />
 
       <div className="action-icons">
         <Link to="/bag">

@@ -1,4 +1,14 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const slideIn = keyframes`
+  from {
+    right: -1000px;
+  }
+
+  to {
+    right: 0;
+  }
+`;
 
 export const StyledFitlerMenu = styled.div`
   position: fixed;
@@ -6,9 +16,9 @@ export const StyledFitlerMenu = styled.div`
   height: 100%;
   background: #fff;
   top: 0;
-  right: 0;
   z-index: 100;
   overflow-y: scroll;
+  animation: ${slideIn} 1s linear forwards;
 
   button {
     cursor: pointer;
@@ -94,4 +104,15 @@ export const FilterCategory = styled.div`
       }
     }
   }
+`;
+
+export const DarkOverlay = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+  animation: ${slideIn} 0.5s linear forwards;
 `;

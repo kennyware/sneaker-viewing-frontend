@@ -5,6 +5,7 @@ import Product from "./Product";
 import { StyledProductSection } from "./styled/ProductSection.styled";
 import Options from "./Options";
 import FilterMenu from "./FilterMenu";
+import Loader from "./Loader";
 
 const Products = () => {
   const [items, setItems] = useState([]);
@@ -33,49 +34,40 @@ const Products = () => {
       return data.filter((item) => !checkData(item));
     };
 
-    const getBrands = async () => {
-      const options = {
-        headers: {
-          "X-RapidAPI-Host": "v1-sneakers.p.rapidapi.com",
-          "X-RapidAPI-Key":
-            "d33eefbeb9msh22abd672c2b24c7p1002dfjsn656f51bdc9b5",
-        },
-      };
-
-      try {
-        const { data: res } = await axios.get(
-          "https://v1-sneakers.p.rapidapi.com/v1/brands",
-          options
-        );
-        setBrands(res.results);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     const fetchData = async () => {
-      const options = {
-        params: { limit: "10", gender },
-        headers: {
-          "X-RapidAPI-Host": "v1-sneakers.p.rapidapi.com",
-          "X-RapidAPI-Key":
-            "d33eefbeb9msh22abd672c2b24c7p1002dfjsn656f51bdc9b5",
-        },
+      // Added delay to avoid "429 too many requests" repsonse
+      const delay = (ms = 1000) => new Promise((r) => setTimeout(r, ms));
+      const headers = {
+        "X-RapidAPI-Host": "v1-sneakers.p.rapidapi.com",
+        "X-RapidAPI-Key": "d33eefbeb9msh22abd672c2b24c7p1002dfjsn656f51bdc9b5",
       };
 
       try {
-        const { data: res } = await axios.get(
+        // Make api call to get data for sneakers
+        const { data: sneakersRes } = await axios.get(
           "https://v1-sneakers.p.rapidapi.com/v1/sneakers",
-          options
+          {
+            params: { limit: 10, gender },
+            headers,
+          }
         );
 
-        setItems(removeEmptyData(res.results));
+        setItems(removeEmptyData(sneakersRes.results));
+
+        // Make api call to get data for brands
+        await delay();
+        const { data: brandsRes } = await axios.get(
+          "https://v1-sneakers.p.rapidapi.com/v1/brands",
+          {
+            headers,
+          }
+        );
+        setBrands(brandsRes.results);
       } catch (err) {
         console.log(err);
       }
     };
 
-    getBrands();
     fetchData();
   }, [gender]);
 
@@ -85,13 +77,19 @@ const Products = () => {
 
   return (
     <>
-      <Options toggleMenu={toggleMenu} />
-      {menuOpen && <FilterMenu brands={brands} toggleMenu={toggleMenu} />}
-      <StyledProductSection>
-        {items.map((item) => {
-          return <Product key={item.id} item={item} />;
-        })}
-      </StyledProductSection>
+      {items.length > 0 && brands.length > 0 ? (
+        <>
+          <Options toggleMenu={toggleMenu} />
+          {menuOpen && <FilterMenu brands={brands} toggleMenu={toggleMenu} />}
+          <StyledProductSection>
+            {items.map((item) => {
+              return <Product key={item.id} item={item} />;
+            })}
+          </StyledProductSection>
+        </>
+      ) : (
+        <Loader />
+      )}
     </>
   );
 };

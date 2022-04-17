@@ -1,4 +1,3 @@
-import { StyledBag } from "./styled/Bag.styled";
 import Product from "./Product";
 import { StyledProductSection } from "./styled/ProductSection.styled";
 import { useState, useEffect } from "react";
