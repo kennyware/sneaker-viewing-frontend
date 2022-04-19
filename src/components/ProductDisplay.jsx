@@ -2,6 +2,7 @@ import { StyledProductDisplay } from "./styled/ProductDisplay.styled";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Loader from "./Loader";
 
 const ProductDisplay = () => {
   const [item, setItem] = useState({});
@@ -45,7 +46,7 @@ const ProductDisplay = () => {
 
   return (
     <StyledProductDisplay>
-      {Object.keys(item).length > 0 && (
+      {Object.keys(item).length > 0 ? (
         <>
           <div className="product-display">
             <img src={item.media.imageUrl} alt="" />
@@ -74,6 +75,8 @@ const ProductDisplay = () => {
           </div>
           <button>Save</button>
         </>
+      ) : (
+        <Loader />
       )}
     </StyledProductDisplay>
   );

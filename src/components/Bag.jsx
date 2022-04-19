@@ -1,5 +1,5 @@
 import Product from "./Product";
-import { StyledProductSection } from "./styled/ProductSection.styled";
+import { StyledProductsGrid } from "./styled/ProductSection.styled";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -32,11 +32,11 @@ const Bag = () => {
     fetchData();
   }, []);
   return (
-    <StyledProductSection>
+    <StyledProductsGrid>
       {items.map((item) => {
         return <Product key={item.id} item={item} />;
       })}
-    </StyledProductSection>
+    </StyledProductsGrid>
   );
 };
 

@@ -17,8 +17,8 @@ export const StyledFitlerMenu = styled.div`
   background: #fff;
   top: 0;
   z-index: 100;
-  overflow-y: scroll;
-  animation: ${slideIn} 1s linear forwards;
+  overflow-y: auto;
+  animation: ${slideIn} 0.5s linear forwards;
 
   button {
     cursor: pointer;
@@ -95,6 +95,7 @@ export const FilterCategory = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: all 0.2s;
       transform: ${({ toggleCategory }) =>
         toggleCategory ? "none" : "rotate(180deg)"};
 
@@ -114,5 +115,5 @@ export const DarkOverlay = styled.div`
   right: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 99;
-  animation: ${slideIn} 0.5s linear forwards;
+  animation: ${slideIn} 0.2s linear forwards;
 `;

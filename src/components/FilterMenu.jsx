@@ -27,7 +27,7 @@ const FilterMenu = ({ brands, toggleMenu }) => {
 
   return (
     <>
-      <DarkOverlay />
+      <DarkOverlay onClick={toggleMenu} />
       <StyledFitlerMenu>
         <div className="heading">
           <h2>Filter</h2>

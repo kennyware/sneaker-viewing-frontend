@@ -23,6 +23,10 @@ export const StyledProductDisplay = styled.div`
     grid-column: 2 / 3;
     grid-row: 1 / 2;
 
+    h5 {
+      text-transform: capitalize;
+    }
+
     h3 {
       font-size: 2rem;
     }
@@ -33,15 +37,20 @@ export const StyledProductDisplay = styled.div`
     grid-row: 2;
 
     table {
-      width: 300px;
+      width: 100%;
     }
 
     th {
       text-align: left;
+      min-width: 110px;
     }
 
     tr {
       height: 30px;
+    }
+
+    td {
+      padding-left: 20px;
     }
   }
 

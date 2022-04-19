@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import Product from "./Product";
-import { StyledProductSection } from "./styled/ProductSection.styled";
+import {
+  StyledProductsGrid,
+  StyledProductsHeading,
+} from "./styled/ProductSection.styled";
 import Options from "./Options";
 import FilterMenu from "./FilterMenu";
 import Loader from "./Loader";
@@ -79,13 +82,16 @@ const Products = () => {
     <>
       {items.length > 0 && brands.length > 0 ? (
         <>
-          <Options toggleMenu={toggleMenu} />
+          <StyledProductsHeading>
+            <h2>{gender}s Shoes</h2>
+            <Options toggleMenu={toggleMenu} />
+          </StyledProductsHeading>
           {menuOpen && <FilterMenu brands={brands} toggleMenu={toggleMenu} />}
-          <StyledProductSection>
+          <StyledProductsGrid>
             {items.map((item) => {
               return <Product key={item.id} item={item} />;
             })}
-          </StyledProductSection>
+          </StyledProductsGrid>
         </>
       ) : (
         <Loader />

@@ -1,4 +1,25 @@
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
+
+const moveUp = keyframes`
+0% {
+  width: 0;
+  
+}
+
+50% {
+  height: 0;
+  width: 100%;
+}
+
+100% {
+  width: 100%;
+  height: 60%;
+}
+`;
+
+const animateMixin = css`
+  animation: ${moveUp} 0.3s linear forwards;
+`;
 
 export const StyledSearchBar = styled.div`
   .logo {
@@ -9,6 +30,7 @@ export const StyledSearchBar = styled.div`
     order: 3;
   }
   display: flex;
+  ${({ searching }) => searching && animateMixin}
   ${({ searching }) =>
     searching
       ? `
@@ -16,8 +38,6 @@ export const StyledSearchBar = styled.div`
       background: #fff;
       top: 0;
       right: 0;
-      width: 100%;
-      height: 60%;
       justify-content: center;
       padding: 25px;
       z-index: 50;

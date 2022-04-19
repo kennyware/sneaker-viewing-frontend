@@ -1,11 +1,25 @@
 import styled, { keyframes } from "styled-components";
 
-export const StyledProductSection = styled.div`
+export const StyledProductsGrid = styled.div`
   display: grid;
   grid-template-columns: auto auto auto;
   gap: 50px;
   justify-content: space-between;
   clear: right;
+`;
+
+export const StyledProductsHeading = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+
+  h2 {
+    text-transform: capitalize;
+    font-family: "Noto Sans", sans-serif;
+  }
 `;
 
 const rotate = keyframes`
