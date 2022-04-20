@@ -2,11 +2,11 @@ import { StyledLogo } from "./styled/Logo.styled";
 import { Link } from "react-router-dom";
 import logo from "../logo.svg";
 
-const Logo = () => {
+const Logo = ({ toggleMenu }) => {
   return (
-    <StyledLogo>
+    <StyledLogo className="logo" onClick={toggleMenu}>
       <Link to="/">
-        <img className="logo" src={logo} alt="logo" />
+        <img src={logo} alt="logo" />
       </Link>
     </StyledLogo>
   );

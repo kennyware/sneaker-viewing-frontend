@@ -71,4 +71,33 @@ export const StyledProductDisplay = styled.div`
       opacity: 70%;
     }
   }
+
+  @media (max-width: 768px) {
+    grid-template-columns: auto;
+    grid-template-rows: repeat(4, auto);
+    column-gap: 0;
+    row-gap: 80px;
+
+    .product-display {
+      grid-column: 1;
+      grid-row: 2 / 3;
+    }
+
+    .product-name {
+      grid-column: 1;
+      grid-row: 1 / 2;
+      text-align: center;
+    }
+
+    .product-details {
+      grid-column: 1;
+      grid-row: 3 / 4;
+    }
+
+    button {
+      grid-column: 1;
+      grid-row: 4;
+      margin: 0;
+    }
+  }
 `;

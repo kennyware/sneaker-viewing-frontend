@@ -26,4 +26,14 @@ export const StyledCollections = styled.section`
       max-height: 550px;
     }
   }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 426px) {
+    grid-template-columns: auto;
+    gap: 20px;
+  }
 `;

@@ -4,7 +4,7 @@ import loginImg from "../loginImg.jpg";
 const Register = () => {
   return (
     <StyledRegister>
-      <div className="register-group">
+      <div className="register-group display">
         <h1>FLY AMER1CA</h1>
         <img src={loginImg} alt="jordan shoes" />
       </div>

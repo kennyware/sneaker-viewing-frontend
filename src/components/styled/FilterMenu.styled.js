@@ -66,6 +66,10 @@ export const StyledFitlerMenu = styled.div`
       }
     }
   }
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 export const FilterCategory = styled.div`

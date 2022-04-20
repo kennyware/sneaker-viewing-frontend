@@ -8,6 +8,14 @@ const SearchBar = () => {
   const [searchText, setSearchText] = useState("");
   const [searching, setSearching] = useState(false);
 
+  const onSubmit = (e) => {
+    if (!searchText) {
+      e.preventDefault();
+    }
+
+    setSearching(true);
+  };
+
   return (
     <>
       {searching && <BlurredOverlay onClick={() => setSearching(false)} />}
@@ -15,13 +23,13 @@ const SearchBar = () => {
         <div className="search-container">
           {searching && (
             <>
-              <Logo className="logo" />
+              <Logo toggleMenu={() => setSearching(false)} />
               <button className="close-btn" onClick={() => setSearching(false)}>
                 <CgClose />
               </button>
             </>
           )}
-          <form>
+          <form onSubmit={onSubmit}>
             <button type="submit" className="search-btn">
               <MdSearch />
             </button>

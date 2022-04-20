@@ -4,7 +4,7 @@ import loginImg from "../loginImg.jpg";
 const Login = () => {
   return (
     <StyledLogin>
-      <div className="login-group">
+      <div className="login-group display">
         <h1>FLY AMER1CA</h1>
         <img src={loginImg} alt="jordan shoes" />
       </div>

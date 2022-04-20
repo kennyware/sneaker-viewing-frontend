@@ -6,6 +6,10 @@ export const StyledProductsGrid = styled.div`
   gap: 50px;
   justify-content: space-between;
   clear: right;
+
+  @media (max-width: 768px) {
+    grid-template-columns: auto auto;
+  }
 `;
 
 export const StyledProductsHeading = styled.div`
@@ -17,8 +21,11 @@ export const StyledProductsHeading = styled.div`
   margin-bottom: 10px;
 
   h2 {
-    text-transform: capitalize;
     font-family: "Noto Sans", sans-serif;
+
+    span {
+      text-transform: capitalize;
+    }
   }
 `;
 

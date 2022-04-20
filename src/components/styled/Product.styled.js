@@ -38,9 +38,16 @@ export const StyledProduct = styled.div`
 
   h4 {
     margin-bottom: 15px;
+    text-transform: capitalize;
   }
 
   h5 {
     margin-bottom: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .save-btn {
+      display: none;
+    }
   }
 `;

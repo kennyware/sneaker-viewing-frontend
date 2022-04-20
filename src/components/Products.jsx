@@ -83,7 +83,7 @@ const Products = () => {
       {items.length > 0 && brands.length > 0 ? (
         <>
           <StyledProductsHeading>
-            <h2>{gender}s Shoes</h2>
+            <h2>{gender && <span>{gender}s</span>} Shoes</h2>
             <Options toggleMenu={toggleMenu} />
           </StyledProductsHeading>
           {menuOpen && <FilterMenu brands={brands} toggleMenu={toggleMenu} />}

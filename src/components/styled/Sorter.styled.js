@@ -9,4 +9,8 @@ export const StyledSorter = styled.div`
     color: #666;
     width: 100px;
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const StyledRegister = styled.section`
   width: 100%;
+  height: 400px;
   display: flex;
 
   .register-group {
@@ -18,7 +19,7 @@ export const StyledRegister = styled.section`
     }
 
     #register-form {
-      margin-top: 100px;
+      margin-top: 70px;
       input {
         display: block;
         width: 100%;
@@ -59,6 +60,19 @@ export const StyledRegister = styled.section`
           opacity: 70%;
         }
       }
+    }
+  }
+
+  @media (max-width: 426px) {
+    grid-template-columns: auto;
+    justify-content: center;
+
+    .display {
+      display: none;
+    }
+
+    .register-group {
+      width: 90%;
     }
   }
 `;

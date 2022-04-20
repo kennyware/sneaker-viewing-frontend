@@ -22,10 +22,6 @@ const animateMixin = css`
 `;
 
 export const StyledSearchBar = styled.div`
-  .logo {
-    order: 1;
-  }
-
   .close-btn {
     order: 3;
   }
@@ -44,7 +40,7 @@ export const StyledSearchBar = styled.div`
       `
       : `
         max-width: 150px;
-        margin-right: 30px;
+        margin-right: 20px;
     `}
 
   .search-container {
@@ -64,6 +60,7 @@ export const StyledSearchBar = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 5px;
+    overflow: hidden;
 
     input[type="text"] {
       border: none;
@@ -80,13 +77,13 @@ export const StyledSearchBar = styled.div`
     .search-btn {
       background: none;
       border: none;
-      height: 30px;
-      width: 30px;
+      height: 25px;
+      width: 25px;
       margin-right: 5px;
 
       svg {
-        height: 100%;
-        width: 100%;
+        height: 25px;
+        width: 25px;
       }
     }
   }
@@ -105,6 +102,37 @@ export const StyledSearchBar = styled.div`
 
     &:hover {
       background: #ccc;
+    }
+  }
+
+  @media (max-width: 768px) {
+    margin: 0;
+
+    .search-container {
+      justify-content: space-between;
+    }
+
+    form {
+      border: ${({ searching }) => !searching && "none"};
+      width: 60%;
+
+      input {
+        display: ${({ searching }) => (searching ? "block" : "none")};
+      }
+
+      .search-btn {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  @media (max-width: 426px) {
+    .logo {
+      display: none;
+    }
+
+    form {
+      width: 80%;
     }
   }
 `;

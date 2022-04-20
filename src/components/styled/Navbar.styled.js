@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 export const StyledNavbar = styled.nav`
   display: grid;
-  grid-template-columns: auto 1fr auto auto;
+  grid-template-columns: auto auto auto;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding: 20px 0;
   width: 100%;
 
-  .logo {
+  img {
     width: 139px;
     height: 39px;
   }
@@ -32,6 +32,10 @@ export const StyledNavbar = styled.nav`
         border-bottom: 2px solid #000;
       }
     }
+  }
+
+  .nav-right {
+    display: flex;
   }
 
   .action-icons {
@@ -69,5 +73,44 @@ export const StyledNavbar = styled.nav`
   .account-btn svg {
     width: 25px;
     height: 25px;
+  }
+
+  .menu-btn {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background: none;
+    font-size: 1.25rem;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(3, 33.33%);
+    align-items: center;
+
+    .nav-right {
+      justify-content: flex-end;
+    }
+
+    ul {
+      display: none;
+    }
+
+    .menu-btn {
+      display: block;
+    }
+
+    .bag-btn {
+      margin: 0;
+      button {
+        width: 20px;
+        height: 20px;
+        padding: 0;
+      }
+    }
+
+    .account-btn {
+      display: none;
+    }
   }
 `;

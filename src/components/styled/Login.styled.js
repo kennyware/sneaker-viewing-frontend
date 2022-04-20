@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const StyledLogin = styled.section`
   width: 100%;
+  height: 400px;
   display: flex;
 
   .login-group {
@@ -18,7 +19,7 @@ export const StyledLogin = styled.section`
     }
 
     #login-form {
-      margin-top: 100px;
+      margin-top: 80px;
       input {
         display: block;
         width: 100%;
@@ -59,6 +60,19 @@ export const StyledLogin = styled.section`
           opacity: 70%;
         }
       }
+    }
+  }
+
+  @media (max-width: 426px) {
+    grid-template-columns: auto;
+    justify-content: center;
+
+    .display {
+      display: none;
+    }
+
+    .login-group {
+      width: 90%;
     }
   }
 `;

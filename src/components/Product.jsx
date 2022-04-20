@@ -8,7 +8,7 @@ const Product = ({ item }) => {
       <Link to={`/products/${item.id}`}>
         <div>
           <img src={item.media.smallImageUrl} alt="" />
-          <button>
+          <button className="save-btn">
             <FiHeart />
           </button>
         </div>

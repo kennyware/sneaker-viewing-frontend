@@ -1,4 +1,5 @@
 import Product from "./Product";
+import { StyledBag } from "./styled/Bag.styled";
 import { StyledProductsGrid } from "./styled/ProductSection.styled";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -32,11 +33,14 @@ const Bag = () => {
     fetchData();
   }, []);
   return (
-    <StyledProductsGrid>
-      {items.map((item) => {
-        return <Product key={item.id} item={item} />;
-      })}
-    </StyledProductsGrid>
+    <StyledBag>
+      <h1>Saved Items</h1>
+      <StyledProductsGrid>
+        {items.map((item) => {
+          return <Product key={item.id} item={item} />;
+        })}
+      </StyledProductsGrid>
+    </StyledBag>
   );
 };
 
