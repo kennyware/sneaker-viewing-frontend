@@ -3,7 +3,7 @@ import { DarkOverlay } from "./styled/FilterMenu.styled";
 import { Link } from "react-router-dom";
 import { CgClose } from "react-icons/cg";
 
-const MobileMenu = ({ toggleMenu }) => {
+const MobileMenu = ({ toggleMenu, logout, user }) => {
   return (
     <>
       <DarkOverlay onClick={toggleMenu} />
@@ -38,9 +38,26 @@ const MobileMenu = ({ toggleMenu }) => {
         </ul>
 
         <div className="account">
-          <Link to="/register" onClick={toggleMenu}>
-            My Account
-          </Link>
+          {user === null ? (
+            <>
+              <Link to="/register" onClick={toggleMenu}>
+                Sign Up
+              </Link>
+
+              <Link to="/login" onClick={toggleMenu}>
+                Sign In
+              </Link>
+            </>
+          ) : (
+            <button
+              onClick={() => {
+                toggleMenu();
+                logout();
+              }}
+            >
+              Logout
+            </button>
+          )}
         </div>
       </StyledMobileMenu>
     </>

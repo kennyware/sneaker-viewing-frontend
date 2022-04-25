@@ -52,5 +52,17 @@ export const StyledMobileMenu = styled.div`
     padding-top: 20px;
     font-size: 1.25rem;
     margin-top: 50px;
+
+    a {
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    button {
+      display: block;
+      border: none;
+      background: none;
+      font-size: 1.25rem;
+    }
   }
 `;

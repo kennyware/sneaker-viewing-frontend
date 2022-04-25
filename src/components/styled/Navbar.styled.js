@@ -59,6 +59,20 @@ export const StyledNavbar = styled.nav`
         background: rgba(100, 100, 100, 0.4);
       }
     }
+
+    .logout-btn {
+      width: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 10px;
+
+      svg {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+      }
+    }
   }
 
   .bag-btn {
@@ -109,8 +123,11 @@ export const StyledNavbar = styled.nav`
       }
     }
 
-    .account-btn {
-      display: none;
+    .action-icons {
+      .account-btn,
+      .logout-btn {
+        display: none;
+      }
     }
   }
 `;

@@ -14,31 +14,6 @@ const ProductDisplay = () => {
 
   useEffect(() => {
     // Fetch single product data from api
-
-    // const fetchData = async () => {
-    //   const options = {
-    //     headers: {
-    //       "X-RapidAPI-Host": "v1-sneakers.p.rapidapi.com",
-    //       "X-RapidAPI-Key":
-    //         "d33eefbeb9msh22abd672c2b24c7p1002dfjsn656f51bdc9b5",
-    //     },
-    //   };
-
-    //   try {
-    //     const {
-    //       data: { results },
-    //     } = await axios.get(
-    //       `https://v1-sneakers.p.rapidapi.com/v1/sneakers/${id}`,
-    //       options
-    //     );
-    //     setItem(results[0]);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-
-    // fetchData();
-
     dispatch(getSingleShoe(id));
 
     return () => {

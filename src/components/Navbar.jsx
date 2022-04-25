@@ -1,14 +1,23 @@
 import { StyledNavbar } from "./styled/Navbar.styled";
-import { MdPersonOutline, MdMenu } from "react-icons/md";
+import { MdPersonOutline, MdMenu, MdOutlineLogout } from "react-icons/md";
 import { FiShoppingBag } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 import MobileMenu from "./MobileMenu";
+import { useSelector, useDispatch } from "react-redux";
+import { logout, reset } from "../features/auth/authSlice";
 
 const Navbar = () => {
   const [toggleMobileNav, setToggleMobileNav] = useState(false);
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+  };
 
   return (
     <>
@@ -45,16 +54,26 @@ const Navbar = () => {
                 <FiShoppingBag />
               </button>
             </Link>
-            <Link to="/login" className="account-btn">
-              <button>
-                <MdPersonOutline />
+            {user ? (
+              <button className="logout-btn" onClick={onLogout}>
+                <MdOutlineLogout /> <span>Logout</span>
               </button>
-            </Link>
+            ) : (
+              <Link to="/login" className="account-btn">
+                <button>
+                  <MdPersonOutline />
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       </StyledNavbar>
       {toggleMobileNav && (
-        <MobileMenu toggleMenu={() => setToggleMobileNav(!toggleMobileNav)} />
+        <MobileMenu
+          toggleMenu={() => setToggleMobileNav(!toggleMobileNav)}
+          logout={onLogout}
+          user={user}
+        />
       )}
     </>
   );
