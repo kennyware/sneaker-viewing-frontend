@@ -7,26 +7,26 @@ import { Link } from "react-router-dom";
 const Collections = () => {
   return (
     <StyledCollections>
-      <Link to="/products">
-        <div>
+      <div>
+        <Link to="/products/?gender=men">
           <img src={mensFeatureImg} alt="feature with a man sitting" />
           <p>Men's</p>
-        </div>
-      </Link>
+        </Link>
+      </div>
 
-      <Link to="/products">
-        <div>
+      <div>
+        <Link to="/products/?gender=women">
           <img src={womensFeatureImg} alt="feature with a women sitting" />
           <p>Women's</p>
-        </div>
-      </Link>
+        </Link>
+      </div>
 
-      <Link to="/products">
-        <div>
+      <div>
+        <Link to="/products/?gender=child,preschool,toddler">
           <img src={kidsFeatureImg} alt="feature with a toy and a shoe" />
           <p>Kid's</p>
-        </div>
-      </Link>
+        </Link>
+      </div>
     </StyledCollections>
   );
 };
