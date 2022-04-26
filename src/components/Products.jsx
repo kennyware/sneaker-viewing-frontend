@@ -10,7 +10,6 @@ import FilterMenu from "./FilterMenu";
 import Loader from "./Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { getShoes, getShoeBrands, reset } from "../features/shoes/shoeSlice";
-// import { getShoeBrands } from "../features/brands/brandSlice";
 
 const Products = () => {
   const dispatch = useDispatch();

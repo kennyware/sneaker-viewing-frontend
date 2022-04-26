@@ -26,10 +26,33 @@ const logout = () => {
   localStorage.removeItem("user");
 };
 
+const getSavedItems = async (token) => {
+  console.log("test 2");
+  const { data: res } = await axios.get(API_URL + "saved", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  return res;
+};
+
+const saveItem = async (itemId, token) => {
+  const { data: res } = await axios.post(
+    API_URL + "savedItems",
+    { itemId },
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+
+  return res;
+};
+
 const authService = {
   register,
   login,
   logout,
+  getSavedItems,
+  saveItem,
 };
 
 export default authService;

@@ -2,7 +2,7 @@ import { StyledProduct } from "./styled/Product.styled";
 import { FiHeart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
-const Product = ({ item }) => {
+const Product = ({ item, saved }) => {
   return (
     <StyledProduct>
       <Link to={`/products/${item.id}`}>
