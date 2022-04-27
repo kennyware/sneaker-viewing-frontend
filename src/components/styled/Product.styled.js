@@ -14,7 +14,7 @@ export const StyledProduct = styled.div`
       position: absolute;
       top: 20px;
       right: 25px;
-      border: 1.5px solid #111;
+      border: ${({ saved }) => (!saved ? "1.5px solid #111" : "transparent")};
       border-radius: 50%;
       background: none;
       height: 40px;
@@ -24,14 +24,19 @@ export const StyledProduct = styled.div`
       z-index: 3;
 
       &:hover {
-        background: #111;
-        color: #fff;
+        background: ${({ saved }) => (!saved ? "#111" : "#fff")};
+        color: ${({ saved }) => (!saved ? "#fff" : "#111")};
+
+        svg {
+          ${({ saved }) => saved && "fill: #fff"}
+        }
       }
 
       svg {
         vertical-align: middle;
         height: 20px;
         width: 20px;
+        ${({ saved }) => saved && "fill: #111"}
       }
     }
   }

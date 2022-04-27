@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Product = ({ item, saved }) => {
   return (
-    <StyledProduct>
+    <StyledProduct saved={saved}>
       <Link to={`/products/${item.id}`}>
         <div>
           <img src={item.media.smallImageUrl} alt="" />

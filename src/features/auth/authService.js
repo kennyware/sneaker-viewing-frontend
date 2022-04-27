@@ -27,7 +27,6 @@ const logout = () => {
 };
 
 const getSavedItems = async (token) => {
-  console.log("test 2");
   const { data: res } = await axios.get(API_URL + "saved", {
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -47,12 +46,25 @@ const saveItem = async (itemId, token) => {
   return res;
 };
 
+const unsaveItem = async (itemId, token) => {
+  const { data: res } = await axios.delete(
+    API_URL + "savedItems",
+    { itemId },
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+
+  return res;
+};
+
 const authService = {
   register,
   login,
   logout,
   getSavedItems,
   saveItem,
+  unsaveItem,
 };
 
 export default authService;

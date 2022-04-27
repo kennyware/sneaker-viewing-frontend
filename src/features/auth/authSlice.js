@@ -51,7 +51,6 @@ export const getSavedItems = createAsyncThunk(
   "auth/getSavedItems",
   async (_, thunkAPI) => {
     const token = thunkAPI.getState().auth.user.token;
-    console.log("test");
 
     try {
       return await authService.getSavedItems(token);
@@ -75,6 +74,26 @@ export const saveItem = createAsyncThunk(
 
     try {
       return await authService.saveItem(itemId, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const unsaveItem = createAsyncThunk(
+  "auth/unsaveItem",
+  async (itemId, thunkAPI) => {
+    const token = thunkAPI.getState.auth.user.token;
+
+    try {
+      return await authService.unsaveItem(itemId, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -147,11 +166,23 @@ export const authSlice = createSlice({
       .addCase(saveItem.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(saveItem.fulfilled, (state, action) => {
+      .addCase(saveItem.fulfilled, (state) => {
         state.isLoading = false;
         state.isSuccess = true;
       })
       .addCase(saveItem.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(unsaveItem.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(unsaveItem.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(unsaveItem.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

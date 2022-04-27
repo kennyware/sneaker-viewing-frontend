@@ -2,7 +2,7 @@ import Product from "./Product";
 import { StyledBag } from "./styled/Bag.styled";
 import { StyledProductsGrid } from "./styled/ProductSection.styled";
 import Loader from "./Loader";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSavedItems } from "../features/auth/authSlice";
 
@@ -37,7 +37,6 @@ const Bag = () => {
     // fetchData();
 
     dispatch(getSavedItems());
-    console.log("alert");
   }, [dispatch]);
 
   if (isLoading) return <Loader />;
@@ -48,7 +47,7 @@ const Bag = () => {
       {savedItems.length > 0 ? (
         <StyledProductsGrid>
           {savedItems.map((item) => {
-            return <Product key={item.id} item={item} />;
+            return <Product key={item.id} item={item} saved={true} />;
           })}
         </StyledProductsGrid>
       ) : (
