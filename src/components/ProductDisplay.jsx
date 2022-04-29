@@ -19,10 +19,14 @@ const ProductDisplay = () => {
     // Fetch single product data from api
     dispatch(getSingleShoe(id));
 
+    return () => {
+      dispatch(reset());
+    };
+  }, [id, dispatch]);
+
+  useEffect(() => {
     const checkIfSaved = () => {
       for (let i = 0; i < savedItems.length; i++) {
-        console.log(id);
-        console.log(savedItems[i].id);
         if (savedItems[i].id === id) {
           setIsSaved(true);
         }
@@ -30,11 +34,7 @@ const ProductDisplay = () => {
     };
 
     checkIfSaved();
-
-    return () => {
-      dispatch(reset());
-    };
-  }, [id, dispatch, savedItems]);
+  }, [savedItems, id]);
 
   // Function to convert product release date from "YYYY-MM-DD" to "DD/MM/YYYY"
   const convertDate = (inputFormat) => {

@@ -7,35 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSavedItems } from "../features/auth/authSlice";
 
 const Bag = () => {
-  // const [items, setItems] = useState([]);
   const dispatch = useDispatch();
   const { isLoading, savedItems } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    // const fetchData = async () => {
-    //   const options = {
-    //     params: { limit: "10" },
-    //     headers: {
-    //       "X-RapidAPI-Host": "v1-sneakers.p.rapidapi.com",
-    //       "X-RapidAPI-Key":
-    //         "d33eefbeb9msh22abd672c2b24c7p1002dfjsn656f51bdc9b5",
-    //     },
-    //   };
-
-    //   try {
-    //     const { data: res } = await axios.get(
-    //       "https://v1-sneakers.p.rapidapi.com/v1/sneakers",
-    //       options
-    //     );
-
-    //     setItems(res.results);
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // };
-
-    // fetchData();
-
     dispatch(getSavedItems());
   }, [dispatch]);
 

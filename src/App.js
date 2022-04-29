@@ -10,13 +10,26 @@ import ProductDisplay from "./components/ProductDisplay";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Bag from "./components/Bag";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getSavedItems } from "./features/auth/authSlice";
 
 function App() {
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {
+        dispatch(getSavedItems());
+      }, 2000);
+    }
+  }, [user, dispatch]);
+
   return (
     <Router>
       <GlobalStyles />
       <Header />
-
       <Container>
         <Navbar />
         <Routes>

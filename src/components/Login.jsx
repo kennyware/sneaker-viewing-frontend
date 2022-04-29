@@ -5,12 +5,15 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login, reset } from "../features/auth/authSlice";
+import ErrorBox from "./ErrorBox";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const [error, setError] = useState("");
 
   const { email, password } = formData;
 
@@ -23,7 +26,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isError) {
-      console.log(message);
+      setError(message);
     }
 
     if (user || isSuccess) {
@@ -33,14 +36,14 @@ const Login = () => {
     return () => {
       dispatch(reset());
     };
-  });
+  }, [isError, message, isSuccess, user, dispatch, navigate]);
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     if (!email || !password) {
-      console.log("Please fill in all fields.");
-      return null;
+      setError("Please fill in all fields.");
+      return;
     }
 
     dispatch(login({ email, password }));
@@ -62,11 +65,12 @@ const Login = () => {
         <img src={loginImg} alt="jordan shoes" />
       </div>
       <div className="login-group">
+        {error && <ErrorBox error={error} />}
         <h1>Login</h1>
         <form id="login-form" onSubmit={onSubmit}>
           <div>
             <input
-              type="text"
+              type="email"
               name="email"
               placeholder="Email"
               value={email}

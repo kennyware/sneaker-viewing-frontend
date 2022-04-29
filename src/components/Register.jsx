@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { registerUser, reset } from "../features/auth/authSlice";
+import ErrorBox from "./ErrorBox";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,8 @@ const Register = () => {
     password: "",
     password2: "",
   });
+
+  const [error, setError] = useState("");
 
   const { email, password, password2 } = formData;
 
@@ -24,7 +27,7 @@ const Register = () => {
 
   useEffect(() => {
     if (isError) {
-      console.log(message);
+      setError(message);
     }
 
     if (user || isSuccess) {
@@ -37,13 +40,17 @@ const Register = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (!email || !password || !password2) {
-      console.log("Please fill in all fields.");
-      return null;
+    if (!email || !password) {
+      setError("Please fill in all fields.");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters.");
     }
 
     if (password !== password2) {
-      console.log("Passwords do not match.");
+      setError("Passwords do not match.");
       return null;
     }
 
@@ -66,6 +73,7 @@ const Register = () => {
         <img src={loginImg} alt="jordan shoes" />
       </div>
       <div className="register-group">
+        {error && <ErrorBox error={error} />}
         <h1>Sign Up</h1>
         <form id="register-form" onSubmit={onSubmit}>
           <div>

@@ -36,7 +36,7 @@ const getSavedItems = async (token) => {
 
 const saveItem = async (itemId, token) => {
   const { data: res } = await axios.post(
-    API_URL + "savedItems",
+    API_URL + "saved",
     { itemId },
     {
       headers: { Authorization: `Bearer ${token}` },
@@ -47,13 +47,9 @@ const saveItem = async (itemId, token) => {
 };
 
 const unsaveItem = async (itemId, token) => {
-  const { data: res } = await axios.delete(
-    API_URL + "savedItems",
-    { itemId },
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
+  const { data: res } = await axios.delete(API_URL + "saved/" + itemId, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
   return res;
 };

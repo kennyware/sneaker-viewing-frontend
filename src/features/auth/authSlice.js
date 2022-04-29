@@ -70,7 +70,7 @@ export const getSavedItems = createAsyncThunk(
 export const saveItem = createAsyncThunk(
   "auth/saveItems",
   async (itemId, thunkAPI) => {
-    const token = thunkAPI.getState.auth.user.token;
+    const token = thunkAPI.getState().auth.user.token;
 
     try {
       return await authService.saveItem(itemId, token);
@@ -90,7 +90,7 @@ export const saveItem = createAsyncThunk(
 export const unsaveItem = createAsyncThunk(
   "auth/unsaveItem",
   async (itemId, thunkAPI) => {
-    const token = thunkAPI.getState.auth.user.token;
+    const token = thunkAPI.getState().auth.user.token;
 
     try {
       return await authService.unsaveItem(itemId, token);
@@ -166,9 +166,10 @@ export const authSlice = createSlice({
       .addCase(saveItem.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(saveItem.fulfilled, (state) => {
+      .addCase(saveItem.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.savedItems = action.payload;
       })
       .addCase(saveItem.rejected, (state, action) => {
         state.isLoading = false;
@@ -178,9 +179,10 @@ export const authSlice = createSlice({
       .addCase(unsaveItem.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(unsaveItem.fulfilled, (state) => {
+      .addCase(unsaveItem.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.savedItems = action.payload;
       })
       .addCase(unsaveItem.rejected, (state, action) => {
         state.isLoading = false;

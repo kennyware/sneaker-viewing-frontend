@@ -9,7 +9,7 @@ import Options from "./Options";
 import FilterMenu from "./FilterMenu";
 import Loader from "./Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { getShoes, getShoeBrands, reset } from "../features/shoes/shoeSlice";
+import { getShoes, getShoeBrands } from "../features/shoes/shoeSlice";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -18,10 +18,7 @@ const Products = () => {
     (state) => state.shoes
   );
 
-  // const { brands } = useSelector((state) => state.brands);
-
   const [menuOpen, setMenuOpen] = useState(false);
-  // const [brands, setBrands] = useState([]);
 
   let [searchParams] = useSearchParams();
   const gender = searchParams.get("gender");
@@ -36,10 +33,6 @@ const Products = () => {
     setTimeout(() => {
       dispatch(getShoeBrands());
     }, 2000);
-
-    return () => {
-      dispatch(reset());
-    };
   }, [isError, message, dispatch, gender]);
 
   const toggleMenu = () => {
