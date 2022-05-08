@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import { getBrands, getSneakerById, getSneakers } from "./ShoeService";
 
 const initialState = {
@@ -65,6 +65,10 @@ export const getSingleShoe = createAsyncThunk(
   }
 );
 
+export const sortByPiceLowToHigh = createAction("shoes/sortByPriceLowToHigh");
+export const sortByPiceHighToLow = createAction("shoes/sortByPriceHighToLow");
+export const sortByNewest = createAction("shoes/sortByNewest");
+
 export const shoeSlice = createSlice({
   name: "shoe",
   initialState,
@@ -80,21 +84,15 @@ export const shoeSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.shoes = action.payload;
+        const brands = [];
+        state.shoes.forEach((shoe) => {
+          if (!brands.includes(shoe.brand)) {
+            brands.push(shoe.brand);
+          }
+        });
+        state.brands = brands;
       })
       .addCase(getShoes.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
-      })
-      .addCase(getShoeBrands.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getShoeBrands.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.brands = action.payload;
-      })
-      .addCase(getShoeBrands.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
@@ -111,6 +109,17 @@ export const shoeSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(sortByPiceLowToHigh, (state) => {
+        state.shoes = state.shoes.sort((a, b) => a.retailPrice - b.retailPrice);
+      })
+      .addCase(sortByPiceHighToLow, (state) => {
+        state.shoes = state.shoes.sort((a, b) => b.retailPrice - a.retailPrice);
+      })
+      .addCase(sortByNewest, (state) => {
+        state.shoes = state.shoes.sort(
+          (a, b) => new Date(a.releaseDate) - new Date(b.releaseDate)
+        );
       });
   },
 });

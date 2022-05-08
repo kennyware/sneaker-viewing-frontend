@@ -1,16 +1,6 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
-const slideIn = keyframes`
-  from {
-    right: -1000px;
-  }
-
-  to {
-    right: 0;
-  }
-`;
-
-export const StyledFitlerMenu = styled.div`
+export const StyledFilterMenu = styled.div`
   position: fixed;
   width: 40%;
   height: 100%;
@@ -18,7 +8,8 @@ export const StyledFitlerMenu = styled.div`
   top: 0;
   z-index: 100;
   overflow-y: auto;
-  animation: ${slideIn} 0.5s linear forwards;
+  right: ${({ open }) => (open ? "0" : "-1000px")};
+  transition: all 0.4s ease-out;
 
   button {
     cursor: pointer;
@@ -39,6 +30,19 @@ export const StyledFitlerMenu = styled.div`
       border: none;
       background: none;
       font-size: 2rem;
+    }
+  }
+
+  .filter-clear {
+    text-align: right;
+    margin-top: 20px;
+    margin-right: 20px;
+    text-decoration: underline;
+    color: #aaa;
+    cursor: pointer;
+
+    &:hover {
+      color: #555;
     }
   }
 
@@ -80,6 +84,11 @@ export const FilterCategory = styled.div`
     margin: 0 10px;
     height: ${({ toggleCategory }) => (toggleCategory ? "100%" : "0")};
     overflow: hidden;
+
+    label {
+      text-transform: capitalize;
+      cursor: pointer;
+    }
   }
 
   .heading {
@@ -111,6 +120,28 @@ export const FilterCategory = styled.div`
   }
 `;
 
+export const ColorBox = styled.input`
+  background: ${({ color }) => color};
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  cursor: pointer;
+  appearance: none;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  ${({ color }) => color === "white" && "border: 1.5px solid #111;"}
+
+  &:hover {
+    opacity: 70%;
+  }
+
+  &:checked {
+    background: none;
+    accent-color: ${({ color }) => color};
+    appearance: auto;
+  }
+`;
+
 export const DarkOverlay = styled.div`
   width: 100%;
   height: 100%;
@@ -119,5 +150,6 @@ export const DarkOverlay = styled.div`
   right: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 99;
-  animation: ${slideIn} 0.2s linear forwards;
+  right: ${({ open }) => (open ? "0" : "-2000px")};
+  transition: all 0.2s ease-out;
 `;
