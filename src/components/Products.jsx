@@ -9,9 +9,10 @@ import Options from "./Options";
 import FilterMenu from "./FilterMenu";
 import Loader from "./Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { getShoes } from "../features/shoes/shoeSlice";
+import { getShoes, reset, searchShoes } from "../features/shoes/shoeSlice";
 import { createSelector } from "@reduxjs/toolkit";
 
+// check data for color specified by the "color" filter
 const checkColor = (shoeColor, filters) => {
   if (filters.length > 0) {
     let regEx;
@@ -24,11 +25,13 @@ const checkColor = (shoeColor, filters) => {
   } else return true;
 };
 
+// check data for brand specified by the "brand" filter
 const checkBrands = (brand, filters) => {
   if (filters.length > 0 && !filters.includes(brand)) return false;
   else return true;
 };
 
+// check data for price specified by the "price" filter
 const checkPrice = (price, filters) => {
   if (filters.length > 0) {
     for (const pair of filters) {
@@ -43,8 +46,10 @@ const checkPrice = (price, filters) => {
   return true;
 };
 
+// create selector to hold data for filtered shoes
 const selectFilteredShoes = createSelector(
-  (state) => state.shoes.shoes,
+  (state) =>
+    state.shoes.searched.length > 0 ? state.shoes.searched : state.shoes.shoes,
   (_, filters) => filters,
   (shoes, filters) => {
     return shoes.filter((shoe) => {
@@ -70,7 +75,7 @@ export const FilteredShoes = (filters) => {
 const Products = () => {
   const dispatch = useDispatch();
 
-  const { shoes, brands, isError, isLoading, message } = useSelector(
+  const { shoes, brands, isError, isLoading, message, searched } = useSelector(
     (state) => state.shoes
   );
 
@@ -85,15 +90,31 @@ const Products = () => {
 
   let [searchParams] = useSearchParams();
   const gender = searchParams.get("gender");
+  const searchQuery = searchParams.get("q");
 
   useEffect(() => {
     if (isError) {
       console.log(message);
     }
 
-    dispatch(getShoes(gender));
+    if (gender) {
+      dispatch(getShoes(gender));
+    } else {
+      dispatch(getShoes());
+    }
+
+    return () => {
+      dispatch(reset());
+    };
   }, [isError, message, dispatch, gender]);
 
+  useEffect(() => {
+    if (searchQuery && shoes.length > 0) {
+      dispatch(searchShoes(searchQuery));
+    }
+  }, [dispatch, shoes, searchQuery]);
+
+  // toggle filter menu
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -102,6 +123,7 @@ const Products = () => {
     return <Loader />;
   }
 
+  // Add filters from filter menu to state
   const filterByBrand = (newFilter) => {
     if (!filters["brands"].includes(newFilter)) {
       setFilters((prevState) => ({
@@ -116,6 +138,7 @@ const Products = () => {
     }
   };
 
+  // Add filters from filter menu to state
   const filterByColor = (newFilter) => {
     if (!filters["colors"].includes(newFilter)) {
       setFilters((prevState) => ({
@@ -130,6 +153,7 @@ const Products = () => {
     }
   };
 
+  // Add filters from filter menu to state
   const filterByPrice = (newFilter) => {
     if (!filters["price"].toString().includes(newFilter)) {
       setFilters((prevState) => ({
@@ -157,7 +181,18 @@ const Products = () => {
   return (
     <>
       <StyledProductsHeading>
-        <h2>{gender && <span>{gender}s</span>} Shoes</h2>
+        <div className="label">
+          {searched.length > 0 ? (
+            <>
+              <p>Search results for</p>
+              <h2>
+                {searchQuery} &#40;{searched.length}&#41;
+              </h2>
+            </>
+          ) : (
+            <h2>{gender && <span>{gender}s</span>} Shoes</h2>
+          )}
+        </div>
         <Options toggleMenu={toggleMenu} />
       </StyledProductsHeading>
 
@@ -172,14 +207,10 @@ const Products = () => {
       />
 
       <StyledProductsGrid>
-        {Object.values(filters).some((filter) => filter.length > 0) ? (
-          filteredShoes.length > 0 ? (
-            filteredShoes.map((shoe) => <Product key={shoe.id} item={shoe} />)
-          ) : (
-            <p>No Items Filtered</p>
-          )
+        {filteredShoes.length > 0 ? (
+          filteredShoes.map((shoe) => <Product key={shoe.id} item={shoe} />)
         ) : (
-          shoes.map((shoe) => <Product key={shoe.id} item={shoe} />)
+          <p>No Items Filtered</p>
         )}
       </StyledProductsGrid>
     </>

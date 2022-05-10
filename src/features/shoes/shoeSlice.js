@@ -5,6 +5,7 @@ const initialState = {
   shoes: [],
   brands: [],
   shoe: {},
+  searched: [],
   isSuccess: false,
   isError: false,
   isLoading: false,
@@ -69,6 +70,8 @@ export const sortByPiceLowToHigh = createAction("shoes/sortByPriceLowToHigh");
 export const sortByPiceHighToLow = createAction("shoes/sortByPriceHighToLow");
 export const sortByNewest = createAction("shoes/sortByNewest");
 
+export const searchShoes = createAction("shoes/search");
+
 export const shoeSlice = createSlice({
   name: "shoe",
   initialState,
@@ -119,6 +122,12 @@ export const shoeSlice = createSlice({
       .addCase(sortByNewest, (state) => {
         state.shoes = state.shoes.sort(
           (a, b) => new Date(a.releaseDate) - new Date(b.releaseDate)
+        );
+      })
+      .addCase(searchShoes, (state, action) => {
+        const searchFilter = new RegExp(action.payload, "i");
+        state.searched = state.shoes.filter(
+          (shoe) => shoe.title.search(searchFilter) !== -1
         );
       });
   },

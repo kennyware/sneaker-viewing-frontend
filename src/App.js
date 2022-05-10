@@ -39,6 +39,14 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/bag" element={<Bag />} />
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>Ooops. Page not found.</p>
+              </main>
+            }
+          />
         </Routes>
       </Container>
 

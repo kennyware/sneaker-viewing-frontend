@@ -30,11 +30,6 @@ const MobileMenu = ({ toggleMenu, logout, user }) => {
               Kids
             </Link>
           </li>
-          <li>
-            <Link to="/products/?year=2022" onClick={toggleMenu}>
-              New Releases
-            </Link>
-          </li>
         </ul>
 
         <div className="account">

@@ -8,11 +8,6 @@ export const StyledNavbar = styled.nav`
   padding: 20px 0;
   width: 100%;
 
-  img {
-    width: 139px;
-    height: 39px;
-  }
-
   ul {
     list-style-type: none;
     display: flex;

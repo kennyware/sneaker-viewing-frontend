@@ -30,7 +30,7 @@ const Login = () => {
     }
 
     if (user || isSuccess) {
-      navigate("/");
+      navigate("/", { replace: true });
     }
 
     return () => {

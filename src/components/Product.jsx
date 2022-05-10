@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { saveItem, unsaveItem } from "../features/auth/authSlice";
 
-const Product = ({ item }) => {
+const Product = ({ item, showSaveBtn }) => {
   const { savedItems } = useSelector((state) => state.auth);
   const [saved, setSaved] = useState(false);
   const dispatch = useDispatch();
@@ -31,9 +31,11 @@ const Product = ({ item }) => {
 
   return (
     <StyledProduct saved={saved}>
-      <button className="save-btn" onClick={onClick}>
-        <FiHeart />
-      </button>
+      {showSaveBtn && (
+        <button className="save-btn" onClick={onClick}>
+          <FiHeart />
+        </button>
+      )}
       <Link to={`/products/${item.id}`}>
         <img src={item.media.smallImageUrl} alt="" />
         <h4>{item.shoe}</h4>
@@ -42,6 +44,10 @@ const Product = ({ item }) => {
       </Link>
     </StyledProduct>
   );
+};
+
+Product.defaultProps = {
+  showSaveBtn: true,
 };
 
 export default Product;

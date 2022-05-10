@@ -13,7 +13,7 @@ const moveUp = keyframes`
 
 100% {
   width: 100%;
-  height: 60%;
+  height: 70%;
 }
 `;
 
@@ -49,6 +49,26 @@ export const StyledSearchBar = styled.div`
     height: 40px;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
+
+    .search-results {
+      flex-basis: 100%;
+      order: 4;
+      display: grid;
+      grid-template-columns: repeat(3, 200px);
+      gap: 50px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 30px;
+      opacity: 0;
+      visibility: hidden;
+
+      &.show {
+        opacity: 100;
+        visibility: visible;
+        transition: all 0.3s ease-in;
+      }
+    }
   }
 
   form {

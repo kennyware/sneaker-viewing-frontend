@@ -31,7 +31,7 @@ const Register = () => {
     }
 
     if (user || isSuccess) {
-      navigate("/");
+      navigate("/", { replace: true });
     }
 
     dispatch(reset());

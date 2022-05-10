@@ -40,9 +40,6 @@ const Navbar = () => {
           <li>
             <Link to="/products/?gender=child,preschool,toddler">Kids</Link>
           </li>
-          <li>
-            <Link to="/products/?year=2022">New Releases</Link>
-          </li>
         </ul>
 
         <div className="nav-right">
