@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyledSearchBar, BlurredOverlay } from "./styled/SearchBar.styled";
 import { MdSearch } from "react-icons/md";
 import { CgClose } from "react-icons/cg";
@@ -11,10 +11,36 @@ const SearchBar = () => {
   const [searchText, setSearchText] = useState("");
   const [searching, setSearching] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   const { shoes } = useSelector((state) => state.shoes);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (searching) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+
+      if (searchText) {
+        setSearchText("");
+      }
+    }
+    const checkSize = (mediaQuery) => {
+      if (mediaQuery.matches) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+    const query = window.matchMedia(`(max-width: 425px)`);
+
+    checkSize(query);
+    query.addEventListener("change", checkSize);
+
+    return () => query.removeEventListener("change", checkSize);
+  }, [searching, searchText]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -22,6 +48,7 @@ const SearchBar = () => {
     if (searchText) {
       navigate(`/products?q=${searchText}`);
       setSearching(false);
+      e.target.querySelector("input").blur();
     }
   };
 
@@ -31,6 +58,16 @@ const SearchBar = () => {
     const filter = new RegExp(e.target.value, "i");
 
     setFilteredData(shoes.filter((shoe) => shoe.title.search(filter) !== -1));
+    console.log(shoes.filter((shoe) => shoe.title.search(filter) !== -1));
+  };
+
+  const openMobileSearch = (e) => {
+    if (isMobile) {
+      e.preventDefault();
+      setSearching(true);
+    } else {
+      return false;
+    }
   };
 
   return (
@@ -47,7 +84,11 @@ const SearchBar = () => {
             </>
           )}
           <form onSubmit={onSubmit}>
-            <button type="submit" className="search-btn">
+            <button
+              type="submit"
+              className="search-btn"
+              onClick={openMobileSearch}
+            >
               <MdSearch />
             </button>
             <input
@@ -64,7 +105,7 @@ const SearchBar = () => {
               searching && searchText ? "search-results show" : "search-results"
             }
           >
-            {filteredData.slice(0, 3).map((shoe) => (
+            {filteredData.slice(0, 5).map((shoe) => (
               <Product item={shoe} key={shoe.id} showSaveBtn={false} />
             ))}
           </div>

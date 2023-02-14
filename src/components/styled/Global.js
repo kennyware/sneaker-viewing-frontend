@@ -11,6 +11,7 @@ const GlobalStyles = createGlobalStyle`
 
 body {
     font-family: 'Noto Sans', sans-serif;
+    width: 100vw;
 }
 
 img {
@@ -20,6 +21,10 @@ img {
 
 h1, h2 {
     font-family: 'Oswald', sans-serif;
+}
+
+.no-scroll {
+    overflow: hidden;
 }
 
 `;

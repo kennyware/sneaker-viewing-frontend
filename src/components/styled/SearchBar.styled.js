@@ -1,36 +1,35 @@
 import styled, { keyframes, css } from "styled-components";
 
-const moveUp = keyframes`
+const moveUp = (height) => keyframes`
 0% {
   width: 0;
-  
+  height: 0;
 }
 
 50% {
-  height: 0;
   width: 100%;
+  height: 0;
 }
 
 100% {
   width: 100%;
-  height: 70%;
+  height: ${height};
 }
+
 `;
 
-const animateMixin = css`
-  animation: ${moveUp} 0.3s linear forwards;
+const animateMixin = (height) => css`
+  animation: ${moveUp(height)} 0.3s linear forwards;
 `;
 
 export const StyledSearchBar = styled.div`
-  .close-btn {
-    order: 3;
-  }
   display: flex;
-  ${({ searching }) => searching && animateMixin}
+  ${({ searching }) => searching && animateMixin("70%")}
   ${({ searching }) =>
     searching
       ? `
       position: fixed;
+      // overflow-y: scroll;
       background: #fff;
       top: 0;
       right: 0;
@@ -42,6 +41,14 @@ export const StyledSearchBar = styled.div`
         max-width: 150px;
         margin-right: 20px;
     `}
+
+    @media (max-width: 425px) {
+    ${({ searching }) => searching && animateMixin("100%")}
+  }
+
+  .close-btn {
+    order: 3;
+  }
 
   .search-container {
     display: flex;
@@ -67,6 +74,10 @@ export const StyledSearchBar = styled.div`
         opacity: 100;
         visibility: visible;
         transition: all 0.3s ease-in;
+      }
+
+      @media (max-width: 425px) {
+        grid-template-columns: auto auto;
       }
     }
   }
@@ -130,11 +141,12 @@ export const StyledSearchBar = styled.div`
 
     .search-container {
       justify-content: space-between;
+      ${({ searching }) => !searching && `width: 50px;`}
     }
 
     form {
       border: ${({ searching }) => !searching && "none"};
-      width: 60%;
+      width: 25px;
 
       input {
         display: ${({ searching }) => (searching ? "block" : "none")};
