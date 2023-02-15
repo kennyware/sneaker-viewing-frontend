@@ -49,7 +49,7 @@ export const StyledLoader = styled.div`
   background: #fff;
   top: 0;
   right: 0;
-
+  z-index: 1000;
   font-size: 5rem;
   color: #444;
 `;

@@ -3,7 +3,8 @@ import { StyledSearchBar, BlurredOverlay } from "./styled/SearchBar.styled";
 import { MdSearch } from "react-icons/md";
 import { CgClose } from "react-icons/cg";
 import Logo from "./Logo";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getShoes } from "../features/shoes/shoeSlice";
 import Product from "./Product";
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +17,7 @@ const SearchBar = () => {
   const { shoes } = useSelector((state) => state.shoes);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (searching) {
@@ -25,6 +27,11 @@ const SearchBar = () => {
 
       if (searchText) {
         setSearchText("");
+      }
+    }
+    if (searching) {
+      if (shoes.length < 1) {
+        dispatch(getShoes());
       }
     }
     const checkSize = (mediaQuery) => {
@@ -58,7 +65,6 @@ const SearchBar = () => {
     const filter = new RegExp(e.target.value, "i");
 
     setFilteredData(shoes.filter((shoe) => shoe.title.search(filter) !== -1));
-    console.log(shoes.filter((shoe) => shoe.title.search(filter) !== -1));
   };
 
   const openMobileSearch = (e) => {
@@ -106,7 +112,12 @@ const SearchBar = () => {
             }
           >
             {filteredData.slice(0, 5).map((shoe) => (
-              <Product item={shoe} key={shoe.id} showSaveBtn={false} />
+              <Product
+                item={shoe}
+                key={shoe.id}
+                showSaveBtn={false}
+                closeSearch={() => setSearching(false)}
+              />
             ))}
           </div>
         </div>

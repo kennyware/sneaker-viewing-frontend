@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { saveItem, unsaveItem } from "../features/auth/authSlice";
 
-const Product = ({ item, showSaveBtn }) => {
+const Product = ({ item, showSaveBtn, closeSearch }) => {
   const { savedItems } = useSelector((state) => state.auth);
   const [saved, setSaved] = useState(false);
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const Product = ({ item, showSaveBtn }) => {
   };
 
   return (
-    <StyledProduct saved={saved}>
+    <StyledProduct saved={saved} onClick={closeSearch}>
       {showSaveBtn && (
         <button className="save-btn" onClick={onClick}>
           <FiHeart />
@@ -44,10 +44,6 @@ const Product = ({ item, showSaveBtn }) => {
       </Link>
     </StyledProduct>
   );
-};
-
-Product.defaultProps = {
-  showSaveBtn: true,
 };
 
 export default Product;

@@ -12,6 +12,8 @@ const GlobalStyles = createGlobalStyle`
 body {
     font-family: 'Noto Sans', sans-serif;
     width: 100vw;
+    min-height: 100vh;
+    position: relative;
 }
 
 img {
